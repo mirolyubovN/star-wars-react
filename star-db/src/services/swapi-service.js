@@ -43,7 +43,7 @@ export default class SwapiService {
 	}
 
 	_extractId (planet) {
-		const regExp = /\/([0-9])*\/$/;
+		const regExp = /\/([0-9]*)\/$/;
 		const id = planet.url.match(regExp)[1];
 		return id;
 	}
@@ -80,8 +80,8 @@ export default class SwapiService {
 			id,
 			name: p.name,
 			gender: p.gender,
-			birthYear: p.birthYear,
-			eyeColor: p.eyeColor
+			birthYear: p.birth_year,
+			eyeColor: p.eye_color
 		}
 	}
 }
