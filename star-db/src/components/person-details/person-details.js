@@ -3,6 +3,7 @@ import Spinner from '../spinner/spinner';
 import SwapiService from '../../services/swapi-service';
 
 import './person-details.css';
+import ErrorButton from '../error-button';
 
 export default class PersonDetails extends Component {
 
@@ -68,6 +69,9 @@ export default class PersonDetails extends Component {
 						<li className="list-group-item">
 							<span className="term">Eye Color</span>
 							<span>{eyeColor}</span>
+						</li>
+						<li className="list-group-item">
+							<ErrorButton/>
 						</li>
 					</ul>
 				</div>
