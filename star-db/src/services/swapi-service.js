@@ -79,11 +79,11 @@ export default class SwapiService {
 			name: sh.name,
 			model: sh.model,
 			manufacturer: sh.manufacturer,
-			costInCredits: sh.costInCredits,
+			costInCredits: sh.cost_in_credits,
 			length: sh.length,
 			crew: sh.crew,
 			passengers: sh.passengers,
-			cargoCapacity: sh.cargoCapacity
+			cargoCapacity: sh.cargo_capacity
 		}
 	}
 	_transformPerson = (p) => {
