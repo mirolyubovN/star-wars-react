@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { PersonDetails, PersonList } from '../sw-components';
 import Row from '../row';
 
-
 export default class PeoplePage extends Component {
 
 	state = {
