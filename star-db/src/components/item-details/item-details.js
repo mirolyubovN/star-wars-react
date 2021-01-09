@@ -56,7 +56,7 @@ export default class ItemDetails extends Component {
 	render() {
 
 		if (!this.state.item) {
-			return <span>Select a person from the list to show details</span>
+			return <span>Select an item from the list to show details</span>
 		}
 
 		if (this.state.loading) {
@@ -70,7 +70,9 @@ export default class ItemDetails extends Component {
 		return (
 			<div className="person-details card" key={id}>
 				<img className="person-image"
-					src={image}/>
+					src={image}
+					alt="SW item"	
+				/>
 
 				<div className="card-body">
 					<h4>{name}</h4>
