@@ -8,8 +8,7 @@ import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-service';
 import ErrorBoundry from '../error-boundry';
 import Row from '../row';
-import ItemDetails, {Record} from '../item-details/item-details';
-import ItemList from '../item-list';
+import { PersonDetails, PersonList, PlanetList, StarshipList, PlanetDetails, StarshipDetails} from '../sw-components';
 
 export default class App extends Component {
 
@@ -36,46 +35,36 @@ export default class App extends Component {
 		const planet = this.state.showRandomPlanet ?
 		<RandomPlanet/> : null;
 
-		const {getPerson, getStarship, getPersonImageUrl, getStarshipImageUrl, getAllPeople, getAllStarships} = this.swapiService;
-
 		const personList = (
-			<ItemList
-				getData={getAllPeople}
+			<PersonList
 				onItemSelected={()=>{}}
 			>
 				{({name}) => <span>{name}</span>}
-			</ItemList>
+			</PersonList>
 		);
-		const personDetails = (
-			<ItemDetails 
-				itemId={11}
-				getData = {getPerson}
-				getImageUrl={getPersonImageUrl}
+		const planetList = (
+			<PlanetList
+				onItemSelected={()=>{}}
 			>
-				<Record field="gender" label="Gender"/>
-				<Record field="eyeColor" label="Eye color"/>
-			</ItemDetails>
-			
+				{({name}) => <span>{name}</span>}
+			</PlanetList>
 		);
 		const starshipList = (
-			<ItemList
-				getData={getAllStarships}
+			<StarshipList
 				onItemSelected={()=>{}}
 			>
 				{({name}) => <span>{name}</span>}
-			</ItemList>
+			</StarshipList>
+		);
+
+		const personDetails = (
+			<PersonDetails itemId={11}/>
+		);
+		const planetDetails = (
+			<PlanetDetails itemId={11}/>
 		);
 		const starshipDetails = (
-			<ItemDetails
-				itemId={5}
-				getData = {getStarship}
-				getImageUrl={getStarshipImageUrl}
-			>
-				<Record field="model" label="Model"/>
-				<Record field="length" label="Length"/>
-				<Record field="costInCredits" label="Cost"/>
-			</ItemDetails>
-
+			<StarshipDetails itemId={11}/>
 		);
 
 		return (
@@ -85,6 +74,10 @@ export default class App extends Component {
 					<Row 
 						left={personList}
 						right={personDetails}
+					/>
+					<Row 
+						left={planetList}
+						right={planetDetails}
 					/>
 					<Row 
 						left={starshipList}
