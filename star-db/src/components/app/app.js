@@ -10,6 +10,8 @@ import ErrorBoundry from '../error-boundry';
 import Row from '../row';
 import { PersonDetails, PersonList, PlanetList, StarshipList, PlanetDetails, StarshipDetails} from '../sw-components';
 
+import {SwapiServiceProvider} from '../swapi-service-context';
+
 export default class App extends Component {
 
 	swapiService = new SwapiService();
@@ -35,49 +37,25 @@ export default class App extends Component {
 		const planet = this.state.showRandomPlanet ?
 		<RandomPlanet/> : null;
 
-		const personList = (
-			<PersonList
-				onItemSelected={()=>{}}
-			/>
-		);
-		const planetList = (
-			<PlanetList
-				onItemSelected={()=>{}}
-			/>
-		);
-		const starshipList = (
-			<StarshipList
-				onItemSelected={()=>{}}
-			/>
-		);
-
-		const personDetails = (
-			<PersonDetails itemId={11}/>
-		);
-		const planetDetails = (
-			<PlanetDetails itemId={11}/>
-		);
-		const starshipDetails = (
-			<StarshipDetails itemId={11}/>
-		);
-
 		return (
 			<ErrorBoundry>
-				<div className="stardb-app">
-					<Header />
-					<Row 
-						left={personList}
-						right={personDetails}
-					/>
-					<Row 
-						left={planetList}
-						right={planetDetails}
-					/>
-					<Row 
-						left={starshipList}
-						right={starshipDetails}
-					/>
-				</div>
+				<SwapiServiceProvider value={this.swapiService}>
+					<div className="stardb-app">
+						<Header />
+						<Row 
+							left={<PersonList onItemSelected={()=>{}}/>}
+							right={<PersonDetails itemId={11}/>}
+						/>
+						<Row 
+							left={<PlanetList onItemSelected={()=>{}}/>}
+							right={<PlanetDetails itemId={11}/>}
+						/>
+						<Row 
+							left={<StarshipList onItemSelected={()=>{}}/>}
+							right={<StarshipDetails itemId={11}/>}
+						/>
+					</div>
+				</SwapiServiceProvider>
 			</ErrorBoundry>
 		);
 	}
