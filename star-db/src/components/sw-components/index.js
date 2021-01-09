@@ -7,5 +7,5 @@ import {
 
 export {
 	PersonDetails, PlanetDetails, StarshipDetails,
-	PersonList, PlanetList, StarshipList,
+	PersonList, PlanetList, StarshipList
 };
