@@ -3,6 +3,7 @@ import Spinner from '../spinner/spinner';
 
 import './item-details.css';
 import ErrorButton from '../error-button';
+import ErrorIndicator from '../error-indicator';
 
 const Record = ({field, label, item}) => {
 	return (
@@ -22,7 +23,8 @@ export default class ItemDetails extends Component {
 	state = {
 		item: null,
 		loading: true,
-		image: null
+		image: null,
+		error: true
 	};
 
 	componentDidMount() {
@@ -31,13 +33,18 @@ export default class ItemDetails extends Component {
 
 	componentDidUpdate(prevProps) {
 		if (this.props.itemId !== prevProps.itemId ||
-			this.props.getData !== prevProps.getData) {
+			this.props.getData !== prevProps.getData ||
+			this.props.getImageUrl !== prevProps.getImageUrl) {
+			console.log('updated');
 			this.updateItem();
 		}
 	}
 
 	updateItem() {
-		this.setState({loading: true});
+		this.setState({
+			loading: true,
+			error: false
+		});
 		const {itemId, getData, getImageUrl} = this.props;
 
 		if (!itemId) {
@@ -50,6 +57,12 @@ export default class ItemDetails extends Component {
 					loading: false, 
 					image: getImageUrl(item)
 				});
+			})
+			.catch(() => {
+				this.setState({
+					loading: false,
+					error: true
+				})
 			});
 	}
 
@@ -62,10 +75,13 @@ export default class ItemDetails extends Component {
 		if (this.state.loading) {
 			return <Spinner/>
 		}
+		
+		if (this.state.error) {
+			return <ErrorIndicator/>
+		}
 
 		const {item, image} = this.state;
 		const {id, name} = item;
-
 
 		return (
 			<div className="person-details card" key={id}>
