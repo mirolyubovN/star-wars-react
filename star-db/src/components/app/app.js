@@ -46,5 +46,5 @@ export default class App extends Component {
 				</SwapiServiceProvider>
 			</ErrorBoundry>
 		);
-	}
-}
+	};
+};

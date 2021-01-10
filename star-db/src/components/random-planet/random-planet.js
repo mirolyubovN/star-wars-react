@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import SwapiService from '../../services/swapi-service';
 
@@ -18,27 +19,28 @@ export default class RandomPlanet extends Component {
 	};
 
 	componentDidMount() {
+		const {updateInterval} = this.props;
 		this.updatePlanet();
-		this.interval = setInterval(this.updatePlanet, 10000);
-	}
+		this.interval = setInterval(this.updatePlanet, updateInterval);
+	};
 
 	componentWillUnmount() {
 		clearInterval(this.interval);
-	}
+	};
 
 	onPlanetLoaded = (planet) => {
 		this.setState({
 			planet,
 			loading: false
 		})
-	}
+	};
 
 	onError = err => {
 		this.setState({
 			error: true,
 			loading: false
 		});
-	}
+	};
 
 	updatePlanet = () => {
 		const id = Math.floor(Math.random() * 11) + 1;
@@ -46,7 +48,8 @@ export default class RandomPlanet extends Component {
 			.getPlanet(id)
 			.then(this.onPlanetLoaded)
 			.catch(this.onError);
-	}
+	};
+
 	render() {
 		const {loading, planet, error} = this.state;
 
@@ -64,9 +67,16 @@ export default class RandomPlanet extends Component {
 			</div>
 
 		);
-	}
-}
+	};
+};
 
+RandomPlanet.defaultProps = {
+	updateInterval : 10000
+};
+
+RandomPlanet.propTypes = {
+	updateInterval: PropTypes.number
+};
 
 const PlanetView = ({ planet }) => {
 	const {id, name, population,
