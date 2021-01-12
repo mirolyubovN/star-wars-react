@@ -2,14 +2,18 @@ import React from 'react';
 
 import ItemDetails, {Record} from '../item-details/item-details';
 import {withSwapiService} from '../hoc-helpers';
+import ErrorBoundry from '../error-boundry';
+
 
 const StarshipDetails = (props) => {
 	return (
-			<ItemDetails {...props}>
-				<Record field="model" label="Model"/>
-				<Record field="length" label="Length"/>
-				<Record field="costInCredits" label="Cost"/>
-			</ItemDetails>
+			<ErrorBoundry>
+				<ItemDetails {...props}>
+					<Record field="model" label="Model"/>
+					<Record field="length" label="Length"/>
+					<Record field="costInCredits" label="Cost"/>
+				</ItemDetails>
+			</ErrorBoundry>
 		);
 };
 
